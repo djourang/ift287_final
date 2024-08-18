@@ -1,10 +1,10 @@
 package AubergeInn.gestionnaires;
 
-import AubergeInn.utils.Connexion;
-import AubergeInn.donnees.collections.CollectionChambre;
-import AubergeInn.donnees.collections.CollectionMembre;
-import AubergeInn.donnees.collections.CollectionReservation;
+import AubergeInn.collections.CollectionChambre;
+import AubergeInn.collections.CollectionMembre;
+import AubergeInn.collections.CollectionReservation;
 import AubergeInn.tuples.Membre;
+import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 
 public class GestionMembre {

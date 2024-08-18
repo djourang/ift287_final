@@ -1,4 +1,4 @@
-package auberServlet;
+package com.aubergeServlet.fInal;
 
 import AubergeInn.gestionnaires.GestionObergeInn;
 import AubergeInn.utils.IFT287Exception;
@@ -59,7 +59,7 @@ public class Accueil extends HttpServlet
                 System.out.println("Servlet Accueil : POST - Inscrire");
                 try
                 {
-                    // Lecture des paramètres du formulaire de creerCompte.jsp
+                    // Lecture des paramètres du formulaire de CreerCompte.jsp
                     String userId = request.getParameter("userId");
                     String motDePasse = request.getParameter("motDePasse");
                     String nom = request.getParameter("nom");
@@ -122,7 +122,7 @@ public class Accueil extends HttpServlet
                     List<String> listeMessageErreur = new LinkedList<String>();
                     listeMessageErreur.add(e.getMessage());
                     request.setAttribute("listeMessageErreur", listeMessageErreur);
-                    RequestDispatcher dispatcher = request.getRequestDispatcher("/creerCompte.jsp");
+                    RequestDispatcher dispatcher = request.getRequestDispatcher("/CreerCompte.jsp");
                     dispatcher.forward(request, response);
                     e.printStackTrace();
                 }
@@ -133,7 +133,7 @@ public class Accueil extends HttpServlet
             List<String> listeMessageErreur = new LinkedList<String>();
             listeMessageErreur.add(e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/login.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/Login.jsp");
             dispatcher.forward(request, response);
             e.printStackTrace();
         }

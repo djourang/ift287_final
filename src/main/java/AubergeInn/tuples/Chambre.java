@@ -109,6 +109,25 @@ public class Chambre {
             commoditeDocs.add(commodite.toDocument());
         }
         return commoditeDocs;
-}
+    }
 
+    public int getM_idChambre() {
+        return m_idChambre;
+    }
+
+    public String getM_nomChambre() {
+        return m_nomChambre;
+    }
+
+    public String getM_typeLit() {
+        return m_typeLit;
+    }
+
+    public double getM_prixBase() {
+        return m_prixBase;
+    }
+
+    public List<Commodite> getM_commodites() {
+        return m_commodites;
+    }
 }

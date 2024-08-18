@@ -1,7 +1,7 @@
 package AubergeInn.gestionnaires;
 
+import AubergeInn.collections.*;
 import AubergeInn.utils.Connexion;
-import AubergeInn.donnees.collections.*;
 
 
 public class GestionObergeInn {

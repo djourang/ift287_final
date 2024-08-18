@@ -1,7 +1,7 @@
 package com.aubergeServlet.fInal.trasationServlets;
 
+
 import AubergeInn.gestionnaires.GestionObergeInn;
-import AubergeInn.tuples.Chambre;
 import AubergeInn.utils.IFT287Exception;
 import com.aubergeServlet.fInal.AubergeHelper;
 import jakarta.servlet.RequestDispatcher;
@@ -17,7 +17,7 @@ import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AfficherChambresLibresServlet extends HttpServlet {
+public class ReserverServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -28,36 +28,40 @@ public class AfficherChambresLibresServlet extends HttpServlet {
             GestionObergeInn gestionObergeInn = AubergeHelper.getaubergeUpdate(session);
 
             // Lecture des paramètres du formulaire
+            String idClientStr = request.getParameter("idClient");
+            String idChambreStr = request.getParameter("idChambre");
             String dateDebutStr = request.getParameter("dateDebut");
             String dateFinStr = request.getParameter("dateFin");
 
             // Validation et exécution de la transaction
-            if (dateDebutStr != null && dateFinStr != null) {
+            if (idClientStr != null && idChambreStr != null && dateDebutStr != null && dateFinStr != null) {
+                int idClient = Integer.parseInt(idClientStr);
+                int idChambre = Integer.parseInt(idChambreStr);
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
                 Date dateDebut = sdf.parse(dateDebutStr);
                 Date dateFin = sdf.parse(dateFinStr);
 
-                List<Chambre> chambresLibres = gestionObergeInn.getGestionChambre().afficherChambresLibres(dateDebut, dateFin);
+                gestionObergeInn.getGestionReservation().reserver(idClient, idChambre, dateDebut, dateFin);
 
-                // Stocker le résultat dans la requête
-                request.setAttribute("chambresLibres", chambresLibres);
+                // Stocker un message de succès dans la session
+                session.setAttribute("messageSucces", "La réservation a été effectuée avec succès.");
 
-                // Rediriger vers la page d'affichage avec les résultats
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
-                dispatcher.forward(request, response);
+                // Rediriger vers le tableau de bord
+                response.sendRedirect(request.getContextPath() + "/transaction?action=dashboard");
             } else {
-                throw new IFT287Exception("Les deux dates sont requises.");
+                throw new IFT287Exception("Tous les champs sont requis pour effectuer une réservation.");
             }
         } catch (IFT287Exception e) {
             listeMessageErreur.add(e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Reserver.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             listeMessageErreur.add("Erreur inattendue : " + e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Reserver.jsp");
             dispatcher.forward(request, response);
         }
     }
 }
+

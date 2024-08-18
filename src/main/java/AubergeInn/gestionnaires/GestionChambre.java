@@ -1,9 +1,14 @@
 package AubergeInn.gestionnaires;
 
-import AubergeInn.donnees.collections.*;
+
+import AubergeInn.collections.CollectionChambre;
+import AubergeInn.collections.CollectionCommodite;
+import AubergeInn.collections.CollectionReservation;
 import AubergeInn.tuples.Chambre;
 import AubergeInn.utils.IFT287Exception;
+
 import java.util.Date;
+import java.util.List;
 
 
 public class GestionChambre {
@@ -35,11 +40,11 @@ public class GestionChambre {
     /*
     Cette transaction affiche les informations sur une chambre, incluant les commodités offertes.
      */
-    public void afficherChambre(int idChambre) throws IFT287Exception {
+    public Chambre afficherChambre(int idChambre) throws IFT287Exception {
         try {
             // Vérifie que le client existe bien
             if ((chambres.getChambreById(idChambre) == null))throw new IFT287Exception("La chambre : " + idChambre + " n'existe pas.");
-            chambres.afficherChambre(idChambre);
+            return chambres.afficherChambre(idChambre);
             // Commit
         } catch (Exception e) {
             throw e;
@@ -51,7 +56,7 @@ public class GestionChambre {
     30 mars est libre la nuit entre le 29 et le 30 mars, et ne l'est pas nécessairement le 30 au soir).
     L'affichage doit inclure le prix de location de la chambre (prix de base, plus les commodités).
      */
-    public void afficherChambresLibres(Date dateDebut, Date dateFin) throws Exception {
+    public List<Chambre> afficherChambresLibres(Date dateDebut, Date dateFin) throws Exception {
         try {
 
             //verifier si la date de debut est superieure a la date de fin
@@ -60,7 +65,7 @@ public class GestionChambre {
             Date currentDate = new Date();
             //if (dateDebut.before(currentDate) || dateFin.before(currentDate)) {throw new IFT287Exception("La date de debut " + dateDebut + " est une date passer " + dateFin);}
 
-            reservations.afficherChambresLibres(new java.sql.Date(dateDebut.getTime()), new java.sql.Date(dateFin.getTime()));
+            return reservations.afficherChambresLibres(new java.sql.Date(dateDebut.getTime()), new java.sql.Date(dateFin.getTime()));
 
 
         } catch (Exception e) {

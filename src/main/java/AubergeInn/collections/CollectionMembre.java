@@ -1,8 +1,8 @@
-package AubergeInn.donnees.collections;
+package AubergeInn.collections;
 
 
-import AubergeInn.utils.Connexion;
 import AubergeInn.tuples.Membre;
+import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;

@@ -1,8 +1,8 @@
 package AubergeInn.gestionnaires;
 
 
-import AubergeInn.donnees.collections.CollectionChambre;
-import AubergeInn.donnees.collections.CollectionCommodite;
+import AubergeInn.collections.CollectionChambre;
+import AubergeInn.collections.CollectionCommodite;
 import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Commodite;
 import AubergeInn.utils.IFT287Exception;

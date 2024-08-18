@@ -1,8 +1,10 @@
-package com.aubergeServlet.fInal;
+package com.aubergeServlet.fInal.trasationServlets;
 
 import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 import AubergeInn.utils.Securite;
+import com.aubergeServlet.fInal.AubergeConstantes;
+import com.aubergeServlet.fInal.AubergeHelper;
 import com.mongodb.MongoSecurityException;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
@@ -21,13 +23,13 @@ import java.security.NoSuchAlgorithmException;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Login extends HttpServlet {
+public class LoginClient extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
     public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         try {
-            System.out.println("Servlet Login : POST");
+            System.out.println("Servlet LoginClient : POST");
 
             // Lecture des paramètres du formulaire index.jsp
             String userIdBD = request.getParameter("userIdBD");
@@ -77,7 +79,7 @@ public class Login extends HttpServlet {
                     // Si l'utilisateur n'existe pas, l'ajouter
                     Document newUser = new Document("username", userIdBD)
                             .append("password", motDePasseHash)
-                            .append("role", "ADMIN");
+                            .append("role", "CLIENT");
                     userCollection.insertOne(newUser);
                 }
 
@@ -95,10 +97,10 @@ public class Login extends HttpServlet {
                 // Stocker les informations utilisateur dans la session
                 session.setAttribute("etat", AubergeConstantes.CONNECTE);
                 session.setAttribute("bd", bd);
-                session.setAttribute("role", "ADMIN");
+                session.setAttribute("role", "CLIENT");
 
-                // Rediriger vers le tableau de bord
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/TableauDeBordAdmin.jsp");
+                // Rediriger vers le tableau de bord client
+                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/TableauDeBordClient.jsp");
                 dispatcher.forward(request, response);
 
                 // Fermeture de la connexion après redirection
@@ -106,7 +108,7 @@ public class Login extends HttpServlet {
 
             } catch (MongoSecurityException e) {
                 List<String> listeMessageErreur = new LinkedList<>();
-                listeMessageErreur.add("Erreur d'authentification : Veuillez vérifier votre nom d'utilisateur et mot de passe. Assurez-vous que les informations fournies sont correctes et que la base de données d'authentification est correcte.");
+                listeMessageErreur.add("Erreur d'authentification : Veuillez vérifier votre nom d'utilisateur et mot de passe.");
                 request.setAttribute("listeMessageErreur", listeMessageErreur);
                 RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
                 dispatcher.forward(request, response);
@@ -138,7 +140,7 @@ public class Login extends HttpServlet {
 
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Servlet Login : GET");
+        System.out.println("Servlet LoginClient : GET");
         RequestDispatcher dispatcher = request.getRequestDispatcher("/index.jsp");
         dispatcher.forward(request, response);
     }

@@ -2,7 +2,6 @@
   Created by IntelliJ IDEA.
   User: Haran
   Date: 8/16/2024
-  Time: 10:55 PM
   To change this template use File | Settings | File Templates.
 --%>
 <%@ page import="java.util.*,java.text.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
@@ -19,6 +18,7 @@
 
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <link rel="stylesheet" href="/tp5/css/logoTabBord.css">
 
 </head>
 <body>
@@ -64,7 +64,7 @@
     </div>
 </div>
 <br>
-<jsp:include page="/WEB-INF/messageErreur.jsp" />
+<jsp:include page="/WEB-INF/MessageErreur.jsp" />
 <br>
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>

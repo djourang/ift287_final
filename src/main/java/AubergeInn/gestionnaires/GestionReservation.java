@@ -1,8 +1,8 @@
 package AubergeInn.gestionnaires;
 
-import AubergeInn.donnees.collections.CollectionChambre;
-import AubergeInn.donnees.collections.CollectionClient;
-import AubergeInn.donnees.collections.CollectionReservation;
+import AubergeInn.collections.CollectionChambre;
+import AubergeInn.collections.CollectionClient;
+import AubergeInn.collections.CollectionReservation;
 import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Client;
 import AubergeInn.tuples.Reservation;
@@ -30,7 +30,7 @@ public class GestionReservation {
     dateFin (son depart). Par exemple, s'il reserve une chambre du 29 au 30 mars, il la
     reserve pour 1 nuit, celle entre le 29 et le 30 mars (et non 2 nuits).
      */
-    public void reserver(int idClient, int idChambre, Date dateDebut, Date dateFin) throws IFT287Exception {
+    public void reserver(int idClient, int idChambre, java.util.Date dateDebut, java.util.Date dateFin) throws IFT287Exception {
         try {
 
             //verifier si la date de debut > a la date de fin

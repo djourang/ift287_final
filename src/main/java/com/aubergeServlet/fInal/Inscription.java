@@ -1,5 +1,4 @@
-package auberServlet;
-
+package com.aubergeServlet.fInal;
 
 import jakarta.servlet.RequestDispatcher;
 import jakarta.servlet.ServletException;
@@ -9,37 +8,25 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 
-
 public class Inscription extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
-    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Servlet Inscription : POST");
-        if (!AubergeHelper.peutProcederLogin(getServletContext(), request, response)) {
-            // Le dispatch vers le login se fait dans AubergeHelper.peutProceder
-            return;
-        }
-
-        System.out.println("Servlet Inscription : POST dispatch vers creerCompte.jsp");
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/creerCompte.jsp");
+    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        // Redirige vers la page de création de compte lorsqu'on arrive par GET
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/CreerCompte.jsp");
         dispatcher.forward(request, response);
     }
 
-    // Dans les formulaires, on utilise la méthode POST
-    // donc, si le servlet est appelé avec la méthode GET
-    // s'est qu'on a écrit l'adresse directement dans la barre d'adresse.
-    // On procède si on est connecté correctement, sinon, on retourne au login
     @Override
-    public void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        System.out.println("Servlet Inscription : GET");
-        // Si on a déjà entré les informations de connexion valide
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        System.out.println("Servlet Inscription : POST");
 
-        if (AubergeHelper.peutProceder(getServletContext(), request, response)) {
-            System.out.println("Servlet Inscription : GET dispatch vers creerCompte.jsp");
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/creerCompte.jsp");
-            dispatcher.forward(request, response);
-        }
+        // Ici vous pouvez gérer la logique d'inscription si besoin
+        // Par exemple, vérifier les champs remplis sur CreerCompte.jsp et ajouter l'utilisateur à la base de données
+
+        // Une fois l'inscription réussie, rediriger vers une page de confirmation ou de connexion
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/inscriptionSuccess.jsp");
+        dispatcher.forward(request, response);
     }
 }
-

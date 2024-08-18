@@ -60,4 +60,7 @@ public class Commodite {
         return Objects.hash(m_idCommodite);
     }
 
+    public String getNom() {
+        return m_description;
+    }
 }

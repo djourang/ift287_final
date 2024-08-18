@@ -1,16 +1,15 @@
-package AubergeInn.donnees.collections;
+package AubergeInn.collections;
 
-import AubergeInn.utils.Connexion;
 import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Client;
 import AubergeInn.tuples.Reservation;
+import AubergeInn.utils.Connexion;
 import com.mongodb.client.MongoCollection;
 import org.bson.Document;
-import java.sql.Date;
 
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-
 
 import static com.mongodb.client.model.Filters.*;
 
@@ -38,7 +37,7 @@ public class CollectionReservation {
         // return false si not found
         return getReservationsByChambreId(chambre.getidChambre()).isEmpty();
     }
-    public void afficherChambresLibres(Date dateDebut, Date dateFin) {
+    public List<Chambre> afficherChambresLibres(Date dateDebut, Date dateFin) {
         List<Chambre> chambresLibres = new ArrayList<>();
         for (Document doc : stmtToutesLesChambres()) {
             Chambre chambre = new Chambre(doc);
@@ -47,10 +46,7 @@ public class CollectionReservation {
             }
         }
 
-        // Affichage des chambres libres
-        for (Chambre chambre : chambresLibres) {
-            chambre.tostring();
-        }
+        return chambresLibres;
     }
     // obtenir les reservations relier a une chambre
     public void reserver(Reservation reservation) {
@@ -95,7 +91,7 @@ public class CollectionReservation {
     }
 
 
-    public boolean estReserver(Chambre chambre, Date dateDebut, Date dateFin) {
+    public boolean estReserver(Chambre chambre, java.util.Date dateDebut, java.util.Date dateFin) {
         List<Reservation> reservationOfChambre = getReservationsByChambreId(chambre.getidChambre());
         if (reservationOfChambre.size() > 0)
         {

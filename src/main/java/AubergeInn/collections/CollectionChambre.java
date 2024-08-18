@@ -1,16 +1,15 @@
-package AubergeInn.donnees.collections;
-
-import AubergeInn.utils.Connexion;
+package AubergeInn.collections;
 
 import AubergeInn.tuples.Chambre;
 import AubergeInn.tuples.Commodite;
+import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
-import static com.mongodb.client.model.Filters.*;
-
 import com.mongodb.client.model.Updates;
 import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.*;
 
 
 
@@ -43,11 +42,11 @@ public class CollectionChambre {
     }
 
 
-    public void afficherChambre(int idChambre) throws IFT287Exception {
+    public Chambre afficherChambre(int idChambre) throws IFT287Exception {
         Chambre ChambreAafficher = getChambreById(idChambre);
         if (ChambreAafficher == null)throw new IFT287Exception("Client inexistant: " + idChambre);
         else
-            ChambreAafficher.tostring();
+           return ChambreAafficher;
     }
 
 

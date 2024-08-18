@@ -1,4 +1,4 @@
-package auberServlet;
+package com.aubergeServlet.fInal;
 
 import AubergeInn.gestionnaires.GestionObergeInn;
 import AubergeInn.utils.IFT287Exception;
@@ -8,7 +8,6 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
-
 
 import java.io.IOException;
 
@@ -76,7 +75,7 @@ public class AubergeHelper
             session.invalidate();
         }
         // Afficher le menu de connexion principal de l'application
-        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/login.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/Login.jsp");
         dispatcher.forward(request, response);
     }
 

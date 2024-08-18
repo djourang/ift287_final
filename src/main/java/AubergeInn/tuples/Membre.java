@@ -2,6 +2,7 @@ package AubergeInn.tuples;
 
 
 import org.bson.Document;
+
 import java.io.Serializable;
 
 public class Membre implements Serializable {

@@ -5,23 +5,24 @@
   Time: 1:15 AM
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="fr">
+
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
+<html>
 <head>
-    <meta charset="UTF-8">
+    <title>Supprimer Client - Système de gestion de l'auberge</title>
+    <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Supprimer Client - SystÃ¨me de gestion de l'auberge</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 </head>
 <body>
 <div class="container">
     <h1 class="text-center">Supprimer un Client</h1>
     <div class="col-md-4 offset-md-4">
-        <form action="SupprimerClientServlet" method="POST">
+        <form action="SupprimerClient" method="POST">
             <div class="form-group">
                 <label for="idClient">ID Client</label>
-                <input class="form-control" type="number" name="idClient" required>
+                <input class="form-control" type="number" name="idClient" value="<%= request.getAttribute("idClient") != null ? request.getAttribute("idClient") : "" %>" required>
             </div>
             <div class="row">
                 <div class="col-md-6">
@@ -34,7 +35,6 @@
         </form>
     </div>
 </div>
-<jsp:include page="/WEB-INF/messageErreur.jsp"/>
+<jsp:include page="/WEB-INF/MessageErreur.jsp"/>
 </body>
 </html>
-

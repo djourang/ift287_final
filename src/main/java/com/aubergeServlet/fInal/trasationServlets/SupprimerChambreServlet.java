@@ -1,7 +1,7 @@
 package com.aubergeServlet.fInal.trasationServlets;
 
+
 import AubergeInn.gestionnaires.GestionObergeInn;
-import AubergeInn.tuples.Chambre;
 import AubergeInn.utils.IFT287Exception;
 import com.aubergeServlet.fInal.AubergeHelper;
 import jakarta.servlet.RequestDispatcher;
@@ -12,12 +12,10 @@ import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 
 import java.io.IOException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 
-public class AfficherChambresLibresServlet extends HttpServlet {
+public class SupprimerChambreServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
 
     @Override
@@ -28,35 +26,30 @@ public class AfficherChambresLibresServlet extends HttpServlet {
             GestionObergeInn gestionObergeInn = AubergeHelper.getaubergeUpdate(session);
 
             // Lecture des paramètres du formulaire
-            String dateDebutStr = request.getParameter("dateDebut");
-            String dateFinStr = request.getParameter("dateFin");
+            String idChambreStr = request.getParameter("idChambre");
 
             // Validation et exécution de la transaction
-            if (dateDebutStr != null && dateFinStr != null) {
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-                Date dateDebut = sdf.parse(dateDebutStr);
-                Date dateFin = sdf.parse(dateFinStr);
+            if (idChambreStr != null) {
+                int idChambre = Integer.parseInt(idChambreStr);
+                gestionObergeInn.getGestionChambre().supprimerChambre(idChambre);
 
-                List<Chambre> chambresLibres = gestionObergeInn.getGestionChambre().afficherChambresLibres(dateDebut, dateFin);
+                // Stocker un message de succès dans la session
+                session.setAttribute("messageSucces", "La chambre a été supprimée avec succès.");
 
-                // Stocker le résultat dans la requête
-                request.setAttribute("chambresLibres", chambresLibres);
-
-                // Rediriger vers la page d'affichage avec les résultats
-                RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
-                dispatcher.forward(request, response);
+                // Rediriger vers le tableau de bord
+                response.sendRedirect(request.getContextPath() + "/transaction?action=dashboard");
             } else {
-                throw new IFT287Exception("Les deux dates sont requises.");
+                throw new IFT287Exception("L'ID de la chambre est requis.");
             }
         } catch (IFT287Exception e) {
             listeMessageErreur.add(e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/SupprimerChambre.jsp");
             dispatcher.forward(request, response);
         } catch (Exception e) {
             listeMessageErreur.add("Erreur inattendue : " + e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/AfficherChambresLibres.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/SupprimerChambre.jsp");
             dispatcher.forward(request, response);
         }
     }

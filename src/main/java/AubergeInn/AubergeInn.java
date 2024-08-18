@@ -4,12 +4,12 @@ package AubergeInn;
 //   MOUHAMAD MOUSTAPHA MBAYE -          Matricule
 
 
-import AubergeInn.utils.IFT287Exception;
 import AubergeInn.gestionnaires.GestionObergeInn;
+import AubergeInn.utils.IFT287Exception;
 
 import java.io.*;
+import java.sql.Date;
 import java.util.StringTokenizer;
-import java.sql.*;
 
 /**
  * Fichier de base pour le TP2 du cours IFT287

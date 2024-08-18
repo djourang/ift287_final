@@ -1,5 +1,4 @@
-package AubergeInn.utils;
-
+package com.aubergeServlet.fInal.trasationServlets;
 
 import AubergeInn.gestionnaires.GestionObergeInn;
 import AubergeInn.utils.IFT287Exception;
@@ -22,31 +21,37 @@ public class SupprimerClientServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         List<String> listeMessageErreur = new LinkedList<>();
         try {
-            String idClientStr = request.getParameter("idClient");
-
-            if (idClientStr == null || idClientStr.equals("")) {
-                throw new IFT287Exception("Vous devez entrer un ID client.");
-            }
-
-            int idClient = Integer.parseInt(idClientStr);
-
+            // Récupération de l'instance GestionObergeInn de la session
             HttpSession session = request.getSession();
             GestionObergeInn gestionObergeInn = AubergeHelper.getaubergeUpdate(session);
 
-            gestionObergeInn.getGestionClient().supprimerClient(idClient);
+            // Lecture des paramètres du formulaire
+            String idClientStr = request.getParameter("idClient");
 
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/TableauDeBordAdmin.jsp");
-            dispatcher.forward(request, response);
+            // Validation et exécution de la transaction
+            if (idClientStr != null) {
+                int idClient = Integer.parseInt(idClientStr);
+                gestionObergeInn.getGestionClient().supprimerClient(idClient);
 
+                // Ajouter un message de succès à la session (si nécessaire)
+                session.setAttribute("messageSucces", "Le client a été supprimé avec succès.");
+
+                // Rediriger vers le tableau de bord ou une page de confirmation
+                response.sendRedirect(request.getContextPath() + "/transaction?action=dashboard");
+            } else {
+                throw new IFT287Exception("L'ID du client est requis.");
+            }
         } catch (IFT287Exception e) {
             listeMessageErreur.add(e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/supprimerClient.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/SupprimerClient.jsp");
             dispatcher.forward(request, response);
+
+
         } catch (Exception e) {
             listeMessageErreur.add("Erreur inattendue : " + e.getMessage());
             request.setAttribute("listeMessageErreur", listeMessageErreur);
-            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/supprimerClient.jsp");
+            RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/SupprimerClient.jsp");
             dispatcher.forward(request, response);
         }
     }

@@ -1,7 +1,7 @@
-package AubergeInn.donnees.collections;
+package AubergeInn.collections;
 
-import AubergeInn.utils.Connexion;
 import AubergeInn.tuples.Commodite;
+import AubergeInn.utils.Connexion;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.model.Filters;
 import org.bson.Document;

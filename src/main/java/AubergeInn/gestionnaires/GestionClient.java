@@ -1,10 +1,10 @@
 package AubergeInn.gestionnaires;
 
-import AubergeInn.utils.Connexion;
-import AubergeInn.donnees.collections.CollectionChambre;
-import AubergeInn.donnees.collections.CollectionClient;
-import AubergeInn.donnees.collections.CollectionReservation;
+import AubergeInn.collections.CollectionChambre;
+import AubergeInn.collections.CollectionClient;
+import AubergeInn.collections.CollectionReservation;
 import AubergeInn.tuples.Client;
+import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 
 import java.util.ArrayList;
@@ -71,14 +71,14 @@ public class GestionClient {
     Cette transaction affiche toutes les informations sur un client, incluant les réservations
     présentes et passées. Les réservations contiennent le prix total de la réservation, sans les taxes.
      */
-    public void afficherClient(int idClient) throws IFT287Exception {
+    public Client afficherClient(int idClient) throws IFT287Exception {
         try {
 
 
             // Vérifie que le client existe bien
             if (clients.getClientById(idClient) == null)
                 throw new IFT287Exception("Le client : " + idClient + " n'existe pas.");
-            clients.afficherClient(idClient);
+            return clients.afficherClient(idClient);
             // Commit
 
         } catch (Exception e) {

@@ -1,7 +1,7 @@
-package AubergeInn.donnees.collections;
+package AubergeInn.collections;
 
-import AubergeInn.utils.Connexion;
 import AubergeInn.tuples.Client;
+import AubergeInn.utils.Connexion;
 import AubergeInn.utils.IFT287Exception;
 import com.mongodb.client.FindIterable;
 import com.mongodb.client.MongoCollection;
@@ -49,12 +49,12 @@ public class CollectionClient {
     }
 
 
-    public void afficherClient(int idClient) throws IFT287Exception {
+    public Client afficherClient(int idClient) throws IFT287Exception {
         Client clientAafficher = getClientById(idClient);
         if (clientAafficher == null)
             throw new IFT287Exception("Client inexistant: " + idClient);
         else
-            clientAafficher.tostring();
+           return clientAafficher;
     }
     // Méthode pour récupérer tous les clients
     public List<Client> getAllLesClients() {

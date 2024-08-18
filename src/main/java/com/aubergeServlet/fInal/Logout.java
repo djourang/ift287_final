@@ -1,4 +1,7 @@
-package auberServlet;
+package com.aubergeServlet.fInal;
 
-public class Logout {
+import jakarta.servlet.http.HttpServlet;
+
+public class Logout extends HttpServlet {
+
 }

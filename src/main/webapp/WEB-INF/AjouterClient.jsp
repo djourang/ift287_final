@@ -4,14 +4,16 @@
   Date: 8/16/2024
   To change this template use File | Settings | File Templates.
 --%>
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" pageEncoding="ISO-8859-1"%>
+<%@ page import="java.util.*,java.text.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.0 Transitional//EN">
 <html>
 <head>
-    <title>Ajouter Client - Système de gestion de l'auberge</title>
+    <title>Ajouter Client - SystÃ¨me de gestion de l'auberge</title>
     <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/tp5/css/logoTabBord.css">
+
 </head>
 <body>
 <div class="container">
@@ -23,7 +25,7 @@
                 <input class="form-control" type="number" name="idClient" value="<%= request.getAttribute("idClient") != null ? request.getAttribute("idClient") : "" %>" required>
             </div>
             <div class="form-group">
-                <label for="prenom">Prénom</label>
+                <label for="prenom">PrÃ©nom</label>
                 <input class="form-control" type="text" name="prenom" value="<%= request.getAttribute("prenom") != null ? request.getAttribute("prenom") : "" %>" required>
             </div>
             <div class="form-group">
@@ -31,7 +33,7 @@
                 <input class="form-control" type="text" name="nom" value="<%= request.getAttribute("nom") != null ? request.getAttribute("nom") : "" %>" required>
             </div>
             <div class="form-group">
-                <label for="age">Âge</label>
+                <label for="age">Ã‚ge</label>
                 <input class="form-control" type="number" name="age" value="<%= request.getAttribute("age") != null ? request.getAttribute("age") : "" %>" required>
             </div>
             <div class="row">
@@ -39,12 +41,12 @@
                     <input class="btn btn-primary btn-block" type="submit" value="Ajouter Client">
                 </div>
                 <div class="col-md-6">
-                    <a href="../TableauDeBordAdmin.jsp" class="btn btn-secondary btn-block">Annuler</a>
+                    <a href="TableauDeBordAdmin.jsp" class="btn btn-secondary btn-block">Annuler</a>
                 </div>
             </div>
         </form>
     </div>
 </div>
-<jsp:include page="/WEB-INF/messageErreur.jsp"/>
+<jsp:include page="/WEB-INF/MessageErreur.jsp"/>
 </body>
 </html>
